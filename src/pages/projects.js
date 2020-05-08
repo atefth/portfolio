@@ -1,16 +1,16 @@
-import React from "react"
-import "../style.css"
-import Appbar from "../components/appbar"
-import { graphql } from "gatsby"
-import Card from "../components/card"
-import { Helmet } from "react-helmet"
+import React from 'react';
+import '../style.css';
+import Navigation from '../components/navigation';
+import { graphql } from 'gatsby';
+import Card from '../components/card';
+import { Helmet } from 'react-helmet';
 
 function Projects({ data }) {
-  const projectList = data.allProjectsYaml.edges
+  const projectList = data.allProjectsYaml.edges;
 
   return (
     <div className="container-fluid">
-      <Appbar />
+      <Navigation />
       <Helmet>
         <meta charSet="utf-8" />
         <title>Projects | Sumanth</title>
@@ -24,14 +24,14 @@ function Projects({ data }) {
               link={node.link}
               key={node.id}
             />
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 }
 
-export default Projects
+export default Projects;
 
 export const query = graphql`
   {
@@ -46,4 +46,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;

@@ -1,20 +1,28 @@
-import React from "react"
-import "../style.css"
-import Appbar from "../components/appbar"
-import Info from "../components/info"
-import { Helmet } from "react-helmet"
+import React, { useState } from 'react';
+import '../style.css';
+import Navigation from '../components/navigation';
+import FileFolder from '../components/file-folder';
+import Info from '../components/info';
+import { Helmet } from 'react-helmet';
+import Layout from '../components/layout';
 
-function index() {
+const Index = () => {
+  const [isFolderOpen, setIsFolderOpen] = useState(false);
+
+  function openFolder(event) {
+    setIsFolderOpen(!isFolderOpen);
+  }
   return (
-    <div>
-      <Appbar />
-      <Info />
+    <Layout>
+      <Navigation isFolderOpen={isFolderOpen} />
+      <Info isFolderOpen={isFolderOpen} />
+      <FileFolder openFolder={openFolder} isFolderOpen={isFolderOpen} />
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Home | Sumanth</title>
+        <title>Home | Atef Haque</title>
       </Helmet>
-    </div>
-  )
-}
+    </Layout>
+  );
+};
 
-export default index
+export default Index;

@@ -1,0 +1,249 @@
+$width: 940px;
+$angle: -25deg;
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vibrate-3 {
+  animation: vibrate-3 0.5s linear infinite both;
+}
+
+@-webkit-keyframes vibrate-3 {
+  0% {
+    transform: translate(0);
+  }
+
+  10% {
+    transform: translate(-2px, -2px);
+  }
+
+  20% {
+    transform: translate(2px, -2px);
+  }
+
+  30% {
+    transform: translate(-2px, 2px);
+  }
+
+  40% {
+    transform: translate(2px, 2px);
+  }
+
+  50% {
+    transform: translate(-2px, -2px);
+  }
+
+  60% {
+    transform: translate(2px, -2px);
+  }
+
+  70% {
+    transform: translate(-2px, 2px);
+  }
+
+  80% {
+    transform: translate(-2px, -2px);
+  }
+
+  90% {
+    transform: translate(2px, -2px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes vibrate-3 {
+  0% {
+    transform: translate(0);
+  }
+
+  10% {
+    transform: translate(-2px, -2px);
+  }
+
+  20% {
+    transform: translate(2px, -2px);
+  }
+
+  30% {
+    transform: translate(-2px, 2px);
+  }
+
+  40% {
+    transform: translate(2px, 2px);
+  }
+
+  50% {
+    transform: translate(-2px, -2px);
+  }
+
+  60% {
+    transform: translate(2px, -2px);
+  }
+
+  70% {
+    transform: translate(-2px, 2px);
+  }
+
+  80% {
+    transform: translate(-2px, -2px);
+  }
+
+  90% {
+    transform: translate(2px, -2px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+label.folder > input {
+  opacity: 0;
+}
+
+label.folder {
+  cursor: pointer;
+}
+
+.folder-container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.folder-body {
+  position: absolute;
+  top: 175px;
+  left: 365px;
+  @include flex-center;
+}
+
+.slide-folder-down {
+  animation: slide-down 700ms linear forwards;
+  animation-delay: 1.2s;
+}
+
+@keyframes slide-down {
+  0% {
+    top: 175px;
+    left: 365px;
+  }
+
+  15% {
+    top: 275px;
+    left: 365px;
+  }
+
+  100% {
+    top: 860px;
+    left: 170px;
+    position: fixed;
+  }
+}
+
+.folder {
+  position: relative;
+  width: $width;
+  height: calc(#{$width} / 100 * 75);
+  perspective: $width * 15;
+}
+
+.expand-folder {
+  animation: expand-bottom 700ms linear forwards;
+  animation-delay: 1.2s;
+}
+
+@keyframes expand-bottom {
+  0% {
+    width: $width;
+  }
+
+  15% {
+    width: ($width + 40px);
+  }
+
+  35% {
+    width: ($width + 120px);
+  }
+
+  55% {
+    width: ($width + 200px);
+  }
+
+  75% {
+    width: ($width + 280px);
+  }
+
+  100% {
+    width: ($width + 400px);
+  }
+}
+
+.folder span::before,
+.folder span::after,
+.folder::before,
+.folder::after {
+  position: absolute;
+  content: '';
+  border-radius: calc(#{$width} / 100 * 5);
+}
+
+.folder::before {
+  width: 100%;
+  height: 92%;
+  bottom: 0;
+  background-color: #ababab;
+}
+
+.folder span::after {
+  width: 90%;
+  height: 85%;
+  bottom: 0;
+  left: 5%;
+  background-color: #e6e6e6;
+  z-index: 2;
+  transition: transform 250ms ease 0ms;
+  transform: translate3d(0px, 0px, 0px);
+}
+
+.folder span::before {
+  background-color: #cbcbcb;
+  width: 100%;
+  height: 92%;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  transition: transform 500ms ease 0ms;
+  transform-origin: 0 100% 0;
+  outline: 1px solid transparent; /* Firefox anti-aliasing hack */
+  transform-style: preserve-3d;
+
+  @include flex-center;
+}
+
+.folder::after {
+  top: 0;
+  right: 0;
+  width: 35%;
+  height: 50%;
+  border-radius: 100px 60px;
+  background-color: #ababab;
+  z-index: 1;
+}
+
+.folder input:checked + span::before {
+  transform: rotateX($angle);
+}
+
+.folder input:checked + span::after {
+  border-top: 5px solid #00000036;
+  transform: translate3d(0px, -20px, 0px);
+  transition: transform 250ms ease 400ms;
+  box-shadow: 0 -2px 5px -2px rgba(0, 0, 0, 0.4);
+}
